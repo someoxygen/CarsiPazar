@@ -1,0 +1,6 @@
+@CarsiPazarAPI_HostAddress = http://localhost:5237
+
+GET {{CarsiPazarAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
