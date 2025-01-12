@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CarsiPazarAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e00dc98f709e18b6c10632537f4a64ce1f635202")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f731e59ff83ea417ab593b32cf58d736e1b10007")]
 [assembly: System.Reflection.AssemblyProductAttribute("CarsiPazarAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CarsiPazarAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
