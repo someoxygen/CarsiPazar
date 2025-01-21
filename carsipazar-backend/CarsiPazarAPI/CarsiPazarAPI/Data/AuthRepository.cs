@@ -1,15 +1,20 @@
 ﻿using CarsiPazarAPI.Models;
+using Google.Cloud.Firestore;
 using Microsoft.EntityFrameworkCore;
+using CarsiPazarAPI.Services;
 
 namespace CarsiPazarAPI.Data
 {
     public class AuthRepository : IAuthRepository
     {
         DataContext _context;
-        public AuthRepository(DataContext context)
+        FirebaseService _firebaseService;
+        public AuthRepository(DataContext context,FirebaseService firebaseService)
         {
             _context = context;
+            _firebaseService = firebaseService;
         }
+
         public async Task<User> Register(User user, string password)
         {
             byte[] passwordHash;
@@ -19,8 +24,10 @@ namespace CarsiPazarAPI.Data
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-            await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();
+            await _firebaseService.UploadUsersToFirestore(user);
+
+            //await _context.Users.AddAsync(user);
+            //await _context.SaveChangesAsync();
 
             return user;
         }
@@ -34,7 +41,8 @@ namespace CarsiPazarAPI.Data
         }
         public async Task<User> Login(string userName, string password)
         {
-            var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            var user = await _firebaseService.GetUserByUserNameAsync(userName);
+            //var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
             if (user == null)
             {
                 return null;

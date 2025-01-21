@@ -279,3 +279,6 @@ paket-files/
 /carsipazar-backend/CarsiPazarAPI/CarsiPazarAPI/obj/CarsiPazarAPI.csproj.nuget.g.props
 /carsipazar-backend/CarsiPazarAPI/CarsiPazarAPI/obj/project.nuget.cache
 /carsipazar-backend/CarsiPazarAPI/CarsiPazarAPI/CarsiPazarAPI.csproj.user
+/carsipazar-backend/CarsiPazarAPI/.vs/CarsiPazarAPI/v17/.futdcache.v2
+/carsipazar-backend/CarsiPazarAPI/CarsiPazarAPI/bin/Debug/net8.0/CarsiPazarAPI.deps.json
+/carsipazar-backend/CarsiPazarAPI/CarsiPazarAPI/bin/Debug/net8.0/appsettings.json
