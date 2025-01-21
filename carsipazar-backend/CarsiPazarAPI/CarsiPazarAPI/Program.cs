@@ -34,26 +34,33 @@ builder.Services.AddMvc(options =>
 var firebaseConfig = builder.Configuration.GetSection("Firebase");
 var firebaseSections = configuration.GetSection("Firebase:Credentials").Get<Dictionary<string, string>>();
 string projectId = firebaseConfig["ProjectId"];
-string privateKey = firebaseSections["private_key"].Replace("\\n", "\n");
-//string privateKeyPath = firebaseConfig["Credentials"];
-string jsonCredentials = JsonSerializer.Serialize(new
-{
-    type = firebaseSections["type"],
-    project_id = firebaseSections["project_id"],
-    private_key_id = firebaseSections["private_key_id"],
-    private_key = privateKey,
-    client_email = firebaseSections["client_email"],
-    client_id = firebaseSections["client_id"],
-    auth_uri = firebaseSections["auth_uri"],
-    token_uri = firebaseSections["token_uri"],
-    auth_provider_x509_cert_url = firebaseSections["auth_provider_x509_cert_url"],
-    client_x509_cert_url = firebaseSections["client_x509_cert_url"]
-});
+string privateKeyPath = firebaseConfig["PrivateKeyPath"];
+
 FirestoreDb firestoreDb = new FirestoreDbBuilder
 {
     ProjectId = projectId,
-    JsonCredentials = jsonCredentials
+    JsonCredentials = File.ReadAllText(privateKeyPath)
 }.Build();
+
+//string privateKey = firebaseSections["private_key"].Replace("\\n", "\n");
+//string jsonCredentials = JsonSerializer.Serialize(new
+//{
+//    type = firebaseSections["type"],
+//    project_id = firebaseSections["project_id"],
+//    private_key_id = firebaseSections["private_key_id"],
+//    private_key = privateKey,
+//    client_email = firebaseSections["client_email"],
+//    client_id = firebaseSections["client_id"],
+//    auth_uri = firebaseSections["auth_uri"],
+//    token_uri = firebaseSections["token_uri"],
+//    auth_provider_x509_cert_url = firebaseSections["auth_provider_x509_cert_url"],
+//    client_x509_cert_url = firebaseSections["client_x509_cert_url"]
+//});
+//FirestoreDb firestoreDb = new FirestoreDbBuilder
+//{
+//    ProjectId = projectId,
+//    JsonCredentials = jsonCredentials
+//}.Build();
 
 
 builder.Services.AddCors();
