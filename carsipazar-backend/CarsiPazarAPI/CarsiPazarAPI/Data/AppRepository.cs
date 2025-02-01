@@ -44,7 +44,7 @@ namespace CarsiPazarAPI.Data
         //}
         public User GetUserById(int userId)
         {
-            var user = _context.Users.FirstOrDefault(c => c.Id == userId);
+            var user = _context.users.FirstOrDefault(c => c.Id == userId);
             return user;
         }
 

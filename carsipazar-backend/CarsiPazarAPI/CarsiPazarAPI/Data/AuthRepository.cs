@@ -24,10 +24,10 @@ namespace CarsiPazarAPI.Data
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-            await _firebaseService.UploadUsersToFirestore(user);
+            //await _firebaseService.UploadUsersToFirestore(user);
 
-            //await _context.Users.AddAsync(user);
-            //await _context.SaveChangesAsync();
+            await _context.users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
             return user;
         }
@@ -41,8 +41,8 @@ namespace CarsiPazarAPI.Data
         }
         public async Task<User> Login(string userName, string password)
         {
-            var user = await _firebaseService.GetUserByUserNameAsync(userName);
-            //var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == userName);
+            //var user = await _firebaseService.GetUserByUserNameAsync(userName);
+            var user = await _context.users.FirstOrDefaultAsync(x => x.UserName == userName);
             if (user == null)
             {
                 return null;
@@ -74,7 +74,7 @@ namespace CarsiPazarAPI.Data
 
         public async Task<bool> UserExists(string userName)
         {
-            if (await _context.Users.AnyAsync(x => x.UserName == userName))
+            if (await _context.users.AnyAsync(x => x.UserName == userName))
             {
                 return true;
             }
